@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move package &apos;dam.pic.model&apos; to &apos;ProyectoIntegradorConcesionario/src&apos;&#x0D;&#x0A;- Original project: &apos;ProyectoIntegrador_Concesionario&apos;&#x0D;&#x0A;- Destination element: &apos;ProyectoIntegradorConcesionario/src&apos;&#x0D;&#x0A;- Original element: &apos;ProyectoIntegrador_Concesionario/src/dam.pic.model&apos;&#x0D;&#x0A;- Update references to refactored element" description="Move package" destination="=ProyectoIntegradorConcesionario/src" element1="/src&lt;dam.pic.model" flags="589830" fragments="1" id="org.eclipse.jdt.ui.move" policy="org.eclipse.jdt.ui.movePackages" stamp="1621238577096" version="1.0"/>
+</session>

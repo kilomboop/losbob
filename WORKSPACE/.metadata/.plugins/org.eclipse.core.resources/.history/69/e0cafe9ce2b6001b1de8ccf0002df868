@@ -1,0 +1,7 @@
+package dam.login.view;
+
+import javax.swing.JFrame;
+
+public class VInicial extends JFrame {
+
+}

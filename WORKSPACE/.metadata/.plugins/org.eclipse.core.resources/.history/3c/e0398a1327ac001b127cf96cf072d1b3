@@ -1,0 +1,45 @@
+package dam.pic.view;
+
+import javax.swing.JPanel;
+import javax.swing.JMenu;
+import javax.swing.JPopupMenu;
+import java.awt.Component;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JMenuItem;
+import javax.swing.JMenuBar;
+
+public class PMenuEmpleado extends JPanel {
+	public PMenuEmpleado() {
+		
+		JMenuBar menuBar = new JMenuBar();
+		add(menuBar);
+		
+		JMenuItem mntmVerLista = new JMenuItem("Ver Veh\u00EDculos Disponibles");
+		menuBar.add(mntmVerLista);
+		
+		JMenuItem mntmVerReservas = new JMenuItem("Ver Reservas Realizadas");
+		menuBar.add(mntmVerReservas);
+		
+		JMenuItem mntmAniadirVehiculo = new JMenuItem("A\u00F1adir Nuevo Vehiculo");
+		menuBar.add(mntmAniadirVehiculo);
+	}
+	
+	private static void addPopup(Component component, final JPopupMenu popup) {
+		component.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			public void mouseReleased(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			private void showMenu(MouseEvent e) {
+				popup.show(e.getComponent(), e.getX(), e.getY());
+			}
+		});
+	}
+}
