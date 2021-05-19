@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Extract method &apos;private void initComponents()&apos; from &apos;dam.pic.view.VInicial.VInicial()&apos; to &apos;dam.pic.view.VInicial&apos;&#x0D;&#x0A;- Original project: &apos;ProyectoIntegrador_Concesionario&apos;&#x0D;&#x0A;- Method name: &apos;initComponents&apos;&#x0D;&#x0A;- Destination type: &apos;dam.pic.view.VInicial&apos;&#x0D;&#x0A;- Declared visibility: &apos;private&apos;" comments="false" description="Extract method &apos;initComponents&apos;" destination="0" exceptions="false" flags="786434" id="org.eclipse.jdt.ui.extract.method" input="/src&lt;dam.pic.view{VInicial.java" name="initComponents" replace="false" selection="306 1210" stamp="1619780820239" version="1.0" visibility="2"/>
+</session>

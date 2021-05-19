@@ -1,0 +1,34 @@
+package dam.login.main;
+
+import java.awt.EventQueue;
+
+import dam.login.control.LoginListener;
+import dam.login.db.LoginPersistencia;
+import dam.login.view.PLogin;
+import dam.login.view.VAcceso;
+import dam.login.view.VLoginPrimcipal;
+
+public class InicioLogIn {
+
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				VLoginPrimcipal vlp = new VLoginPrimcipal();
+				PLogin plg = new PLogin();
+				VAcceso vacc = new VAcceso();
+				
+				LoginListener listener = new LoginListener(vlp,plg,vacc);
+				
+				plg.setListener(listener);
+				
+				vlp.cargarPanel(plg);
+				vlp.hacerVisible();
+				
+			}
+		});
+
+	}
+
+}

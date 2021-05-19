@@ -1,0 +1,5 @@
+package dam.pic.model;
+
+public class Cliente {
+
+}

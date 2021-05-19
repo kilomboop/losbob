@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="com.sun.jdi.event.EventQueue"/>
+    <fullyQualifiedTypeName name="java.awt.EventQueue"/>
+    <fullyQualifiedTypeName name="java.lang.Runnable"/>
+    <fullyQualifiedTypeName name="dam.pic.view.PListaVehiculosCli"/>
+    <fullyQualifiedTypeName name="dam.pic.view.VInicial"/>
+</qualifiedTypeNameHistroy>

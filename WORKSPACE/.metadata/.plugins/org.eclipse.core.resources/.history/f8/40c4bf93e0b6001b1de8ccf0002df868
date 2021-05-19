@@ -1,0 +1,76 @@
+package dam.login.view;
+
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+import java.awt.Font;
+import javax.swing.JTextField;
+
+import dam.login.control.LoginListener;
+
+import javax.swing.JButton;
+import javax.swing.JPasswordField;
+
+public class PLogin extends JPanel {
+	private JLabel lblUSuario;
+	private JTextField txtUsuario;
+	private JLabel lblContrasenia;
+	private JButton btnLogIn;
+	public static final String BTN_LOGIN ="Login";
+	private JPasswordField pswdContrasenia;
+	public PLogin() {
+		initComponents();
+	}
+
+	private void initComponents() {
+		setLayout(null);
+		
+		setSize(VLoginPrimcipal.ANCHO,VLoginPrimcipal.ALTO);
+		
+		lblUSuario = new JLabel("User:");
+		lblUSuario.setFont(new Font("Arial", Font.BOLD, 14));
+		lblUSuario.setBounds(28, 57, 90, 23);
+		add(lblUSuario);
+		
+		txtUsuario = new JTextField();
+		txtUsuario.setBounds(126, 51, 166, 37);
+		add(txtUsuario);
+		txtUsuario.setColumns(10);
+		
+		pswdContrasenia = new JPasswordField();
+		pswdContrasenia.setBounds(126, 103, 166, 36);
+		add(pswdContrasenia);
+		
+		lblContrasenia = new JLabel("Password:");
+		lblContrasenia.setFont(new Font("Arial", Font.BOLD, 14));
+		lblContrasenia.setBounds(28, 114, 98, 13);
+		add(lblContrasenia);
+		
+		btnLogIn = new JButton(BTN_LOGIN);
+		btnLogIn.setFont(new Font("Arial", Font.BOLD, 14));
+		btnLogIn.setBounds(157, 150, 106, 34);
+		add(btnLogIn);
+	}
+	
+	public JPasswordField getPswdContrasenia() {
+		return pswdContrasenia;
+	}
+
+	public JTextField getTxtUsuario() {
+		return txtUsuario;
+	}
+	
+	public void setListener(LoginListener listener) {
+		btnLogIn.addActionListener(listener);
+	}
+	
+	public void mostrarMsjError(String msj) {
+		JOptionPane.showMessageDialog(this,msj,"Error de Datos",JOptionPane.ERROR_MESSAGE);
+	}
+
+	public void mostrarMsjInfo(String msj) {
+		JOptionPane.showMessageDialog(this,msj,"Información de Aplicación",JOptionPane.INFORMATION_MESSAGE);
+		
+	}
+}

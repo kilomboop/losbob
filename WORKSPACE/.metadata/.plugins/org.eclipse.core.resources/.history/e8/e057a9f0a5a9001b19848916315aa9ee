@@ -1,0 +1,53 @@
+package dam.pic.view;
+
+import javax.swing.JFrame;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+public class VInicial extends JFrame {
+	private JTextField txtUsuario;
+	private JTextField txtContrasenia;
+	private JButton btnLogIn;
+	public VInicial() {
+		initComponents();
+	}
+	private void initComponents() {
+		getContentPane().setLayout(null);
+		
+		JButton btnCliente = new JButton("Acceder como cliente");
+		btnCliente.setBounds(30, 60, 162, 52);
+		getContentPane().add(btnCliente);
+		
+		JButton btnEmpleado = new JButton("Acceder como empleado");
+		btnEmpleado.setBounds(30, 149, 162, 52);
+		getContentPane().add(btnEmpleado);
+		
+		JLabel lblUsuario = new JLabel("Usuario:");
+		lblUsuario.setVisible(false);
+		lblUsuario.setBounds(271, 60, 104, 14);
+		getContentPane().add(lblUsuario);
+		
+		txtUsuario = new JTextField();
+		txtUsuario.setVisible(false);
+		txtUsuario.setBounds(271, 85, 146, 20);
+		getContentPane().add(txtUsuario);
+		txtUsuario.setColumns(10);
+		
+		JLabel lblContrasenia = new JLabel("Contrase\u00F1a:");
+		lblContrasenia.setVisible(false);
+		lblContrasenia.setBounds(271, 116, 104, 14);
+		getContentPane().add(lblContrasenia);
+		
+		txtContrasenia = new JTextField();
+		txtContrasenia.setVisible(false);
+		txtContrasenia.setBounds(271, 141, 146, 20);
+		getContentPane().add(txtContrasenia);
+		txtContrasenia.setColumns(10);
+		
+		btnLogIn = new JButton("Log In");
+		btnLogIn.setVisible(false);
+		btnLogIn.setBounds(300, 178, 89, 23);
+		getContentPane().add(btnLogIn);
+	}
+}

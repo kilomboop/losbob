@@ -1,0 +1,103 @@
+package dam.login.db;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class LoginPersistencia {
+
+	private AccesoDB abd;
+
+	public LoginPersistencia() {
+		
+		abd = new AccesoDB();
+	}
+	
+	public boolean verificarContrasenia(String contrasenia) {
+		boolean verificado=false;
+		String query = "SELECT COUNT(*) FROM USUARIOS WHERE PASSWORD = ?  GROUP BY PASSWORD";
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rslt = null; 
+		
+		try {
+			 con = abd.getConexion();
+			 
+			  pstmt = con.prepareStatement(query);
+			  pstmt.setString(1, contrasenia);
+			  
+			  
+			  rslt =pstmt.executeQuery();
+		if (rslt.getString(1).equals("1")) {
+			verificado=true;
+		}
+		} catch (ClassNotFoundException e) {
+			System.out.println("Problemas con el driver");
+		
+		} catch (SQLException  e) {
+			System.out.println("Problemas con la BBDD");
+		}finally {
+			try {
+				if (rslt!=null) {
+					rslt.close();
+				}
+				if (pstmt!=null) {
+					pstmt.close();
+				}
+				if (con!=null) {
+					con.close();
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return verificado;
+	}
+	
+	public boolean verificarNombreUsuario(String usuario) {
+		boolean verificado=false;
+		String query = "SELECT COUNT(*) FROM USUARIOS WHERE USUARIO = ?  GROUP BY USUARIO";
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rslt = null; 
+		
+		try {
+			 con = abd.getConexion();
+			 
+			  pstmt = con.prepareStatement(query);
+			  pstmt.setString(1, usuario);
+			  
+			  
+			  rslt =pstmt.executeQuery();
+		if (rslt.getString(1).equals("1")) {
+			verificado=true;
+		}
+		} catch (ClassNotFoundException e) {
+			System.out.println("Problemas con el driver");
+		
+		} catch (SQLException  e) {
+			System.out.println("Problemas con la BBDD");
+		}finally {
+			try {
+				if (rslt!=null) {
+					rslt.close();
+				}
+				if (pstmt!=null) {
+					pstmt.close();
+				}
+				if (con!=null) {
+					con.close();
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return verificado;
+	}
+	
+}

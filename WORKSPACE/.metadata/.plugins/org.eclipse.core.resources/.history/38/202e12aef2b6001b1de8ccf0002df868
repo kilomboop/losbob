@@ -1,0 +1,20 @@
+package dam.login.view;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import java.awt.BorderLayout;
+
+public class VContenedor extends JFrame {
+	public VContenedor() {
+		
+		JScrollPane scrpContenedor = new JScrollPane();
+		getContentPane().add(scrpContenedor, BorderLayout.CENTER);
+	}
+
+	public void cargarpanel(JPanel panel) {
+		
+		
+	}
+	
+}
