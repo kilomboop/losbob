@@ -17,6 +17,7 @@ import javax.swing.SpinnerNumberModel;
 
 import dam.login.control.PIListener;
 import dam.login.view.VInicial;
+import javax.swing.JTable;
 
 public class PListaVehiculosCli extends JFrame {
 	
@@ -25,7 +26,6 @@ public class PListaVehiculosCli extends JFrame {
 	
 	
 	private final ButtonGroup buttonGroup = new ButtonGroup();
-	private JList lstVehiculosCli;
 	private JComboBox cmbColorCli;
 	private JButton btnAplicar;
 	private JRadioButton rdbtnTodasCli;
@@ -34,85 +34,84 @@ public class PListaVehiculosCli extends JFrame {
 	private JComboBox cmbCombustibleCli;
 	private JSpinner spnPrecioHastaCli;
 	private JButton btnReserva;
+	private JTable tblVehiculoCli;
 	public PListaVehiculosCli() {
 		initComponents();
 	}
 	private void initComponents() {
-		setLayout(null);
+		getContentPane().setLayout(null);
 		
 		setSize(VInicial.ANCHO + 120, VInicial.ALTO + 120);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(137, 36, 303, 212);
-		add(scrollPane);
+		getContentPane().add(scrollPane);
 		
-		lstVehiculosCli = new JList();
-		lstVehiculosCli.setBorder(null);
-		lstVehiculosCli.setBackground(SystemColor.control);
-		scrollPane.setViewportView(lstVehiculosCli);
+		tblVehiculoCli = new JTable();
+		scrollPane.setViewportView(tblVehiculoCli);
 		
 		JLabel lblListaVehiculosCli = new JLabel("Lista de Veh\u00EDculos disponibles");
 		lblListaVehiculosCli.setBounds(137, 11, 203, 14);
-		add(lblListaVehiculosCli);
+		getContentPane().add(lblListaVehiculosCli);
 		
 		JLabel lblFiltrosCli = new JLabel("Filtros");
 		lblFiltrosCli.setBounds(10, 11, 117, 14);
-		add(lblFiltrosCli);
+		getContentPane().add(lblFiltrosCli);
 		
 		JLabel lblColorCli = new JLabel("Color:");
 		lblColorCli.setBounds(10, 36, 48, 14);
-		add(lblColorCli);
+		getContentPane().add(lblColorCli);
 		
 		cmbColorCli = new JComboBox();
 		cmbColorCli.setModel(new DefaultComboBoxModel(new String[] {"Todos los colores", "Rojo", "Blanco", "Negro", "Azul", "Gris"}));
 		cmbColorCli.setBounds(10, 54, 117, 22);
-		add(cmbColorCli);
+		getContentPane().add(cmbColorCli);
 		
 		btnAplicar = new JButton(BTN_APLICAR);
 		btnAplicar.setBounds(147, 259, 128, 23);
-		add(btnAplicar);
+		getContentPane().add(btnAplicar);
 		
 		JLabel lblTransmisionCli = new JLabel("Transmisi\u00F3n:");
 		lblTransmisionCli.setBounds(10, 87, 117, 14);
-		add(lblTransmisionCli);
+		getContentPane().add(lblTransmisionCli);
 		
 		rdbtnTodasCli = new JRadioButton("Todas");
 		buttonGroup.add(rdbtnTodasCli);
 		rdbtnTodasCli.setSelected(true);
 		rdbtnTodasCli.setBounds(10, 104, 109, 23);
-		add(rdbtnTodasCli);
+		getContentPane().add(rdbtnTodasCli);
 		
 		rdbtnAutomaticoCli = new JRadioButton("Automatico");
 		buttonGroup.add(rdbtnAutomaticoCli);
 		rdbtnAutomaticoCli.setBounds(10, 140, 109, 23);
-		add(rdbtnAutomaticoCli);
+		getContentPane().add(rdbtnAutomaticoCli);
 		
 		rdbtnManualCli = new JRadioButton("Manual");
 		buttonGroup.add(rdbtnManualCli);
 		rdbtnManualCli.setBounds(10, 122, 109, 23);
-		add(rdbtnManualCli);
+		getContentPane().add(rdbtnManualCli);
 		
 		JLabel lblCombustibleCli = new JLabel("Combustible:");
 		lblCombustibleCli.setBounds(10, 169, 117, 14);
-		add(lblCombustibleCli);
+		getContentPane().add(lblCombustibleCli);
 		
 		cmbCombustibleCli = new JComboBox();
 		cmbCombustibleCli.setModel(new DefaultComboBoxModel(new String[] {"Todos", "Gasolina", "Diesel", "H\u00EDbrido", "El\u00E9ctrico"}));
 		cmbCombustibleCli.setBounds(10, 194, 117, 22);
-		add(cmbCombustibleCli);
+		getContentPane().add(cmbCombustibleCli);
 		
 		JLabel lblPrecioHastaCli = new JLabel("Precio Hasta:");
 		lblPrecioHastaCli.setBounds(10, 227, 117, 14);
-		add(lblPrecioHastaCli);
+		getContentPane().add(lblPrecioHastaCli);
 		
 		spnPrecioHastaCli = new JSpinner();
 		spnPrecioHastaCli.setModel(new SpinnerNumberModel(10000, 10000, 100000, 5000));
 		spnPrecioHastaCli.setBounds(10, 247, 117, 20);
-		add(spnPrecioHastaCli);
+		getContentPane().add(spnPrecioHastaCli);
 		
 		btnReserva = new JButton(BTN_RESERVA);
 		btnReserva.setBounds(285, 259, 144, 23);
-		add(btnReserva);
+		getContentPane().add(btnReserva);
 		
 		
 	}
