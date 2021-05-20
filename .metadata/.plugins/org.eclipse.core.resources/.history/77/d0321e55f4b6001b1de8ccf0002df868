@@ -1,0 +1,27 @@
+package dam.login.main;
+
+import java.awt.EventQueue;
+
+import dam.login.control.PIListener;
+import dam.login.view.VContenedor;
+import dam.login.view.VInicial;
+
+public class InicioPI {
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				VInicial vi = new VInicial();
+				VContenedor vc = new VContenedor();
+				
+				PIListener listener = new PIListener(vi, vc);
+				
+				vi.setListener(listener);
+				
+				vi.hacerVisible();
+				
+			}
+		});
+	}
+}

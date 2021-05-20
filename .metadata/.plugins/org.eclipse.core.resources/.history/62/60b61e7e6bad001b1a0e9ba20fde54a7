@@ -1,0 +1,40 @@
+package dam.pic.view;
+
+import javax.swing.JPanel;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JMenu;
+import java.awt.SystemColor;
+
+
+public class PMenuEmpleado extends JPanel {
+	public PMenuEmpleado() {
+		initComponents();
+
+	}
+
+	private void initComponents() {
+		setLayout(null);
+		
+		JMenuBar menuBar = new JMenuBar();
+		menuBar.setBackground(SystemColor.control);
+		menuBar.setBounds(0, 0, 157, 41);
+		add(menuBar);
+		
+		JMenu mnOpciones = new JMenu("Opciones Empleado");
+		mnOpciones.setBackground(SystemColor.control);
+		menuBar.add(mnOpciones);
+		
+		JMenuItem mntmAniadir = new JMenuItem("A\u00F1adir Veh\u00EDculo");
+		mnOpciones.add(mntmAniadir);
+		
+		JMenuItem mntmModificar = new JMenuItem("Modificar Lista");
+		mnOpciones.add(mntmModificar);
+		
+		JMenuItem mntmConsultarLis = new JMenuItem("Consultar Lista");
+		mnOpciones.add(mntmConsultarLis);
+		
+		JMenuItem mntmConsultarRes = new JMenuItem("Consultar Reservas");
+		mnOpciones.add(mntmConsultarRes);
+	}
+}

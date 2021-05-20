@@ -1,0 +1,24 @@
+package dam.pic.main;
+
+import java.awt.EventQueue;
+
+import dam.pic.control.PIListener;
+import dam.pic.view.VInicial;
+
+public class Inicio {
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				VInicial vi = new VInicial();
+				
+				PIListener listener = new PIListener(vi, pme);
+				
+				vi.setListener(listener);
+				
+				vi.hacerVisible();
+			}
+		});
+	}
+}

@@ -1,0 +1,10 @@
+package dam.pic.view;
+
+import javax.swing.JPanel;
+
+
+public class PMenuEmpleado extends JPanel {
+	public PMenuEmpleado() {
+
+	}
+}
