@@ -65,7 +65,6 @@ static final int INTENTOS = 3;
 		} else if (ev.getActionCommand().equals(VInicial.BTN_CLIENTE)) {
 			vi.dispose();
 			plvc.hacerVisible();
-			
 		}
 		
 	}
