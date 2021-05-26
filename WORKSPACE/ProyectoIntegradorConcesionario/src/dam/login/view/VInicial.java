@@ -26,6 +26,7 @@ public class VInicial extends JFrame {
 		getContentPane().setLayout(null);
 		
 		setSize(ANCHO, ALTO);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize(); 
 		Dimension ventana = new Dimension(ANCHO, ALTO);         

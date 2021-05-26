@@ -1,0 +1,50 @@
+package dam.login.view;
+
+import javax.swing.JFrame;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JScrollPane;
+
+public class VEmpleado extends JFrame {
+	private JMenuItem mntmCoReservas;
+	private JScrollPane scrpEmp;
+	public VEmpleado() {
+		
+		crearMenu();
+		init();
+	}
+
+	private void crearMenu() {
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		
+		mntmCoReservas = new JMenuItem("Consulta de Reservas");
+		menuBar.add(mntmCoReservas);
+		
+		JMenuItem mntmModVehiculos = new JMenuItem("Modificaci\u00F3n de Veh\u00EDculos");
+		menuBar.add(mntmModVehiculos);
+	}
+
+	private void init() {
+		getContentPane().setLayout(new BorderLayout(0, 0));
+		
+		scrpEmp = new JScrollPane();
+		getContentPane().add(scrpEmp, BorderLayout.CENTER);
+		
+		setSize(VInicial.ANCHO + 400,VInicial.ALTO + 120);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
+
+		Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
+		Dimension ventana = new Dimension(VInicial.ANCHO + 300,VInicial.ALTO + 350);
+		setLocation((pantalla.width-ventana.width)/2,(pantalla.height-ventana.height)/2);
+	}
+	
+	public void hacerVisible() { 
+		setVisible(true);
+	}
+}

@@ -2,14 +2,16 @@ package dam.login.control;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 
-import dam.login.db.Persistencias;
+import dam.login.db.PIPersistencias;
 import dam.login.view.PListaVehiculosCli;
 import dam.login.view.PLogin;
 import dam.login.view.VEmpleado;
 import dam.login.view.VInicial;
+import dam.pic.model.Coche;
 import dam.pic.model.Empleado;
 
 public class PIListener implements ActionListener{
@@ -19,7 +21,7 @@ static final int INTENTOS = 3;
 	private int contIntent = 0;
 	private VInicial vi;
 	private PLogin pli;
-	private Persistencias modelo;
+	private PIPersistencias modelo;
 	private VEmpleado empl;
 	
 	public PIListener(VInicial vi,  PLogin pli, VEmpleado empl, PListaVehiculosCli plvc) {
@@ -28,7 +30,7 @@ static final int INTENTOS = 3;
 		this.empl = empl;
 		this.plvc = plvc;
 		
-		modelo = new Persistencias();
+		modelo = new PIPersistencias();
 	}
 	@Override
 	public void actionPerformed(ActionEvent ev) {
@@ -62,9 +64,14 @@ static final int INTENTOS = 3;
 				}
 				
 			}
+			ArrayList<Coche> listaCoches = modelo.selectCoches();
+			empl.cargarTabla(listaCoches);
 		} else if (ev.getActionCommand().equals(VInicial.BTN_CLIENTE)) {
 			vi.dispose();
 			plvc.hacerVisible();
+			plvc.cargarCmbColores(modelo.selectDistinctColor());
+			ArrayList<Coche> listaCoches = modelo.selectCoches();
+			plvc.cargarTabla(listaCoches);
 		}
 		
 	}

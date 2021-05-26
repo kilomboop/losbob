@@ -26,7 +26,9 @@ public class PLogin extends JFrame{
 	}
 	private void init() {
 		setLayout(null);
+		
 		setSize(VInicial.ANCHO + 100, VInicial.ALTO + 100);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		txtUsuario = new JTextField();
 		txtUsuario.setBounds(133, 79, 158, 32);

@@ -1,7 +1,10 @@
 package dam.login.view;
 
+import java.awt.Dimension;
 import java.awt.SystemColor;
+import java.awt.Toolkit;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
@@ -14,15 +17,27 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.table.DefaultTableModel;
 
 import dam.login.control.PIListener;
 import dam.login.view.VInicial;
+import dam.pic.model.Coche;
+
 import javax.swing.JTable;
 
 public class PListaVehiculosCli extends JFrame {
 	
+	private static final String CLM_MARCA = "MARCA";
+	private static final String CLM_MODELO = "MODELO";
+	private static final String CLM_ANIO = "AÑO";
+	private static final String CLM_COLOR = "COLOR";
+	private static final String CLM_COMBUSTIBLE = "COMBUSTIBLE";
+	private static final String CLM_PRECIO = "PRECIO";
+	private static final String CLM_TRANSMISION = "TRANSMISION";
+	private static final String CLM_EXTRAS = "EXTRAS";
 	public static final String BTN_RESERVA = "Realizar Reserva";
 	public static final String BTN_APLICAR = "Aplicar filtro";
+	private static final String OPT_TODOSCOLOR = "Todos los Colores";
 	
 	
 	private final ButtonGroup buttonGroup = new ButtonGroup();
@@ -35,16 +50,23 @@ public class PListaVehiculosCli extends JFrame {
 	private JSpinner spnPrecioHastaCli;
 	private JButton btnReserva;
 	private JTable tblVehiculoCli;
+	private DefaultTableModel tblModel;
+	private DefaultComboBoxModel<String> cmbModel;
 	public PListaVehiculosCli() {
 		initComponents();
 	}
 	private void initComponents() {
 		getContentPane().setLayout(null);
 		
-		setSize(VInicial.ANCHO + 120, VInicial.ALTO + 120);
+		setSize(VInicial.ANCHO + 500, VInicial.ALTO + 150);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
+		Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
+		Dimension ventana = new Dimension(VInicial.ANCHO + 100,VInicial.ALTO + 150);
+		setLocation((pantalla.width-ventana.width)/2,(pantalla.height-ventana.height)/2);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(137, 36, 303, 212);
+		scrollPane.setBounds(137, 36, 691, 246);
 		getContentPane().add(scrollPane);
 		
 		tblVehiculoCli = new JTable();
@@ -63,56 +85,94 @@ public class PListaVehiculosCli extends JFrame {
 		getContentPane().add(lblColorCli);
 		
 		cmbColorCli = new JComboBox();
-		cmbColorCli.setModel(new DefaultComboBoxModel(new String[] {"Todos los colores", "Rojo", "Blanco", "Negro", "Azul", "Gris"}));
-		cmbColorCli.setBounds(10, 54, 117, 22);
+		cmbModel = new DefaultComboBoxModel<String>();
+		cmbColorCli.setModel(cmbModel);
+		cmbColorCli.setBounds(10, 61, 117, 22);
 		getContentPane().add(cmbColorCli);
 		
 		btnAplicar = new JButton(BTN_APLICAR);
-		btnAplicar.setBounds(147, 259, 128, 23);
+		btnAplicar.setBounds(10, 298, 117, 31);
 		getContentPane().add(btnAplicar);
 		
 		JLabel lblTransmisionCli = new JLabel("Transmisi\u00F3n:");
-		lblTransmisionCli.setBounds(10, 87, 117, 14);
+		lblTransmisionCli.setBounds(10, 97, 117, 14);
 		getContentPane().add(lblTransmisionCli);
 		
 		rdbtnTodasCli = new JRadioButton("Todas");
 		buttonGroup.add(rdbtnTodasCli);
 		rdbtnTodasCli.setSelected(true);
-		rdbtnTodasCli.setBounds(10, 104, 109, 23);
+		rdbtnTodasCli.setBounds(10, 114, 109, 23);
 		getContentPane().add(rdbtnTodasCli);
 		
 		rdbtnAutomaticoCli = new JRadioButton("Automatico");
 		buttonGroup.add(rdbtnAutomaticoCli);
-		rdbtnAutomaticoCli.setBounds(10, 140, 109, 23);
+		rdbtnAutomaticoCli.setBounds(10, 150, 109, 23);
 		getContentPane().add(rdbtnAutomaticoCli);
 		
 		rdbtnManualCli = new JRadioButton("Manual");
 		buttonGroup.add(rdbtnManualCli);
-		rdbtnManualCli.setBounds(10, 122, 109, 23);
+		rdbtnManualCli.setBounds(10, 132, 109, 23);
 		getContentPane().add(rdbtnManualCli);
 		
 		JLabel lblCombustibleCli = new JLabel("Combustible:");
-		lblCombustibleCli.setBounds(10, 169, 117, 14);
+		lblCombustibleCli.setBounds(10, 184, 117, 14);
 		getContentPane().add(lblCombustibleCli);
 		
 		cmbCombustibleCli = new JComboBox();
 		cmbCombustibleCli.setModel(new DefaultComboBoxModel(new String[] {"Todos", "Gasolina", "Diesel", "H\u00EDbrido", "El\u00E9ctrico"}));
-		cmbCombustibleCli.setBounds(10, 194, 117, 22);
+		cmbCombustibleCli.setBounds(10, 209, 117, 22);
 		getContentPane().add(cmbCombustibleCli);
 		
 		JLabel lblPrecioHastaCli = new JLabel("Precio Hasta:");
-		lblPrecioHastaCli.setBounds(10, 227, 117, 14);
+		lblPrecioHastaCli.setBounds(10, 242, 117, 14);
 		getContentPane().add(lblPrecioHastaCli);
 		
 		spnPrecioHastaCli = new JSpinner();
 		spnPrecioHastaCli.setModel(new SpinnerNumberModel(10000, 10000, 100000, 5000));
-		spnPrecioHastaCli.setBounds(10, 247, 117, 20);
+		spnPrecioHastaCli.setBounds(10, 262, 117, 20);
 		getContentPane().add(spnPrecioHastaCli);
 		
 		btnReserva = new JButton(BTN_RESERVA);
-		btnReserva.setBounds(285, 259, 144, 23);
+		btnReserva.setBounds(565, 293, 138, 41);
 		getContentPane().add(btnReserva);
 		
+		configurarTabla();
+		
+	}
+	private void configurarTabla() {
+		tblModel = new DefaultTableModel() {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				/*if (column == 2) {
+					return true;
+				} else {*/
+					return false;
+				//}
+			}
+		};
+		
+		tblModel.addColumn(CLM_MARCA);
+		tblModel.addColumn(CLM_MODELO);
+		tblModel.addColumn(CLM_ANIO);
+		tblModel.addColumn(CLM_PRECIO);
+		tblModel.addColumn(CLM_COLOR);
+		tblModel.addColumn(CLM_COMBUSTIBLE);
+		tblModel.addColumn(CLM_TRANSMISION);
+		tblModel.addColumn(CLM_EXTRAS);
+		
+		
+		tblVehiculoCli.setModel(tblModel);
+		
+		tblVehiculoCli.getColumn(CLM_MARCA).setPreferredWidth(25);
+		tblVehiculoCli.getColumn(CLM_MODELO).setPreferredWidth(30);
+		tblVehiculoCli.getColumn(CLM_ANIO).setPreferredWidth(5);
+		tblVehiculoCli.getColumn(CLM_PRECIO).setPreferredWidth(25);
+		tblVehiculoCli.getColumn(CLM_COLOR).setPreferredWidth(25);
+		tblVehiculoCli.getColumn(CLM_COMBUSTIBLE).setPreferredWidth(65);
+		tblVehiculoCli.getColumn(CLM_TRANSMISION).setPreferredWidth(60);
+		tblVehiculoCli.getColumn(CLM_EXTRAS).setPreferredWidth(170);
+		
+		tblVehiculoCli.setRowHeight(25);
 		
 	}
 	public void setListener(PIListener listener) {
@@ -121,5 +181,33 @@ public class PListaVehiculosCli extends JFrame {
 	}
 	public void hacerVisible() {
 		setVisible(true);
+	}
+	public void cargarTabla(ArrayList<Coche> listaCoches) {
+		tblModel.setRowCount(0);
+		
+		Object[] fila = new Object[8];
+		
+		for (Coche coche : listaCoches) {
+			fila[0] = coche.getMarca();
+			fila[1] = coche.getModelo();
+			fila[2] = coche.getAnio();
+			fila[3] = coche.getPrecio();
+			fila[4] = coche.getColor();
+			fila[5] = coche.getCombustible();
+			fila[6] = coche.getTransmision();
+			fila[7] = coche.getExtras();
+			
+			tblModel.addRow(fila);
+		}
+	}
+	
+	public void cargarCmbColores(ArrayList<String> listaColores) {
+		cmbModel.removeAllElements();
+		
+		cmbModel.addElement(OPT_TODOSCOLOR);
+		for (String color : listaColores) {
+			cmbModel.addElement(color);
+		}
+		
 	}
 }
