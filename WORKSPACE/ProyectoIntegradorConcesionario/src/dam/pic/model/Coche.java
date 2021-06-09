@@ -1,17 +1,17 @@
 package dam.pic.model;
 
 public class Coche {
-	private String id; 
+	private int id; 
 	private String marca;
 	private String modelo;
 	private String color ;
-	private String anio ;
+	private int anio ;
 	private String extras;
 	private String combustible; 
 	private int precio;
 	private String transmision;
 	
-	public Coche(String id, String marca, String modelo, String color, String anio, String extras, String combustible,
+	public Coche(int id, String marca, String modelo, String color, int anio, String extras, String combustible,
 			int precio, String transmision) {
 		super();
 		this.id = id;
@@ -25,7 +25,7 @@ public class Coche {
 		this.transmision = transmision;
 	}
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
@@ -41,7 +41,7 @@ public class Coche {
 		return color;
 	}
 
-	public String getAnio() {
+	public int getAnio() {
 		return anio;
 	}
 

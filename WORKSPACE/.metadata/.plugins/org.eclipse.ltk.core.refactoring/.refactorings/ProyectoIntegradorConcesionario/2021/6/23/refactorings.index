@@ -1,0 +1,5 @@
+1623141656476	Rename field 'dni'
+1623141662441	Rename field 'id_coche'
+1623145976904	Extract method 'initComponents'
+1623229616653	Rename local variable 'listaColores'
+1623230661966	Rename local variable 'listaCombustible'

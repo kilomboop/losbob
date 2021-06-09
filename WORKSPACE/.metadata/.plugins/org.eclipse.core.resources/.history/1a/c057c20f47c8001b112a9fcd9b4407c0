@@ -1,0 +1,100 @@
+package dam.login.view;
+
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.JTextField;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+
+public class PAddVehiculo extends JPanel{
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	public PAddVehiculo() {
+		initComponents();
+	}
+
+	private void initComponents() {
+		setSize(VInicial.ANCHO + 350, VInicial.ALTO + 150);
+		
+		Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
+		Dimension ventana = new Dimension(VInicial.ANCHO + 100,VInicial.ALTO + 150);
+		setLocation((pantalla.width-ventana.width)/2,(pantalla.height-ventana.height)/2);
+		
+		setLayout(null);
+		
+		JLabel lblAddVehiculo = new JLabel("A\u00F1adir Veh\u00EDculo");
+		lblAddVehiculo.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblAddVehiculo.setBounds(26, 39, 137, 22);
+		add(lblAddVehiculo);
+		
+		JLabel lblID = new JLabel("ID Veh\u00EDculo:");
+		lblID.setBounds(26, 84, 77, 14);
+		add(lblID);
+		
+		JSpinner spinner = new JSpinner();
+		spinner.setModel(new SpinnerNumberModel(1, 1, 9999, 1));
+		spinner.setBounds(113, 81, 50, 20);
+		add(spinner);
+		
+		JLabel lblMarca = new JLabel("Marca:");
+		lblMarca.setBounds(26, 140, 59, 14);
+		add(lblMarca);
+		
+		textField = new JTextField();
+		textField.setBounds(95, 137, 111, 20);
+		add(textField);
+		textField.setColumns(10);
+		
+		JLabel lblModelo = new JLabel("Modelo:");
+		lblModelo.setBounds(260, 140, 68, 14);
+		add(lblModelo);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(338, 137, 137, 20);
+		add(textField_1);
+		textField_1.setColumns(10);
+		
+		JLabel lblColor = new JLabel("Color:");
+		lblColor.setBounds(26, 202, 59, 14);
+		add(lblColor);
+		
+		textField_2 = new JTextField();
+		textField_2.setBounds(95, 199, 111, 20);
+		add(textField_2);
+		textField_2.setColumns(10);
+		
+		JLabel lblTransmision = new JLabel("Transmisi\u00F3n:");
+		lblTransmision.setBounds(260, 205, 83, 14);
+		add(lblTransmision);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"AUTOMATICA", "MANUAL"}));
+		comboBox.setBounds(353, 198, 122, 22);
+		add(comboBox);
+		
+		JLabel lblCombustible = new JLabel("Combustible:");
+		lblCombustible.setBounds(26, 258, 77, 14);
+		add(lblCombustible);
+		
+		JComboBox comboBox_1 = new JComboBox();
+		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"GASOLINA", "DIESEL", "HIBRIDO", "ELECTRICO"}));
+		comboBox_1.setBounds(113, 254, 122, 22);
+		add(comboBox_1);
+		
+		JLabel lblPrecio = new JLabel("Precio:");
+		lblPrecio.setBounds(260, 84, 59, 14);
+		add(lblPrecio);
+		
+		JSpinner spinner_1 = new JSpinner();
+		spinner_1.setModel(new SpinnerNumberModel(5000, 5000, 150000, 500));
+		spinner_1.setBounds(318, 81, 77, 20);
+		add(spinner_1);
+	}
+}

@@ -37,21 +37,24 @@ public class PListaVehiculosCli extends JFrame {
 	private static final String CLM_EXTRAS = "EXTRAS";
 	public static final String BTN_RESERVA = "Realizar Reserva";
 	public static final String BTN_APLICAR = "Aplicar filtro";
-	private static final String OPT_TODOSCOLOR = "Todos los Colores";
+	public static final String OPT_TODOSCOLOR = "Todos los Colores";
+	public static final String OPT_TODOSCOMB = "Todos";
 	
 	
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JComboBox cmbColorCli;
 	private JButton btnAplicar;
-	private JRadioButton rdbtnTodasCli;
-	private JRadioButton rdbtnAutomaticoCli;
-	private JRadioButton rdbtnManualCli;
 	private JComboBox cmbCombustibleCli;
 	private JSpinner spnPrecioHastaCli;
 	private JButton btnReserva;
 	private JTable tblVehiculoCli;
 	private DefaultTableModel tblModel;
 	private DefaultComboBoxModel<String> cmbModel;
+	private DefaultComboBoxModel<String> cmbModel2;
+	private DefaultComboBoxModel<String> cmbModel3;
+	private JRadioButton rdbtnTodosCli;
+	private JRadioButton rdbtnAutomaticoCli;
+	private JRadioButton rdbtnManualCli;
 	public PListaVehiculosCli() {
 		initComponents();
 	}
@@ -98,33 +101,18 @@ public class PListaVehiculosCli extends JFrame {
 		lblTransmisionCli.setBounds(10, 97, 117, 14);
 		getContentPane().add(lblTransmisionCli);
 		
-		rdbtnTodasCli = new JRadioButton("Todas");
-		buttonGroup.add(rdbtnTodasCli);
-		rdbtnTodasCli.setSelected(true);
-		rdbtnTodasCli.setBounds(10, 114, 109, 23);
-		getContentPane().add(rdbtnTodasCli);
-		
-		rdbtnAutomaticoCli = new JRadioButton("Automatico");
-		buttonGroup.add(rdbtnAutomaticoCli);
-		rdbtnAutomaticoCli.setBounds(10, 150, 109, 23);
-		getContentPane().add(rdbtnAutomaticoCli);
-		
-		rdbtnManualCli = new JRadioButton("Manual");
-		buttonGroup.add(rdbtnManualCli);
-		rdbtnManualCli.setBounds(10, 132, 109, 23);
-		getContentPane().add(rdbtnManualCli);
-		
 		JLabel lblCombustibleCli = new JLabel("Combustible:");
-		lblCombustibleCli.setBounds(10, 184, 117, 14);
+		lblCombustibleCli.setBounds(10, 179, 117, 14);
 		getContentPane().add(lblCombustibleCli);
 		
 		cmbCombustibleCli = new JComboBox();
-		cmbCombustibleCli.setModel(new DefaultComboBoxModel(new String[] {"Todos", "Gasolina", "Diesel", "H\u00EDbrido", "El\u00E9ctrico"}));
-		cmbCombustibleCli.setBounds(10, 209, 117, 22);
+		cmbModel2 = new DefaultComboBoxModel<String>();
+		cmbCombustibleCli.setModel(cmbModel2);
+		cmbCombustibleCli.setBounds(10, 204, 117, 22);
 		getContentPane().add(cmbCombustibleCli);
 		
 		JLabel lblPrecioHastaCli = new JLabel("Precio Hasta:");
-		lblPrecioHastaCli.setBounds(10, 242, 117, 14);
+		lblPrecioHastaCli.setBounds(10, 237, 117, 14);
 		getContentPane().add(lblPrecioHastaCli);
 		
 		spnPrecioHastaCli = new JSpinner();
@@ -135,6 +123,23 @@ public class PListaVehiculosCli extends JFrame {
 		btnReserva = new JButton(BTN_RESERVA);
 		btnReserva.setBounds(565, 293, 138, 41);
 		getContentPane().add(btnReserva);
+		
+		rdbtnTodosCli = new JRadioButton("Todas");
+		buttonGroup.add(rdbtnTodosCli);
+		rdbtnTodosCli.setSelected(true);
+		rdbtnTodosCli.setBounds(10, 111, 109, 23);
+		getContentPane().add(rdbtnTodosCli);
+		
+		rdbtnAutomaticoCli = new JRadioButton("Automatico");
+		buttonGroup.add(rdbtnAutomaticoCli);
+		rdbtnAutomaticoCli.setBounds(10, 129, 109, 23);
+		getContentPane().add(rdbtnAutomaticoCli);
+		
+		rdbtnManualCli = new JRadioButton("Manual");
+		buttonGroup.add(rdbtnManualCli);
+		rdbtnManualCli.setBounds(10, 149, 109, 23);
+		getContentPane().add(rdbtnManualCli);
+		cmbModel3 = new DefaultComboBoxModel<String>();
 		
 		configurarTabla();
 		
@@ -209,5 +214,41 @@ public class PListaVehiculosCli extends JFrame {
 			cmbModel.addElement(color);
 		}
 		
+	}
+	
+	public void cargarCmbCombustible(ArrayList<String> listaCombustibles) {
+		cmbModel2.removeAllElements();
+		
+		cmbModel2.addElement(OPT_TODOSCOMB);
+		for (String combustible : listaCombustibles) {
+			cmbModel2.addElement(combustible);
+		}
+		
+	}
+	
+	public String getColorFiltro() {
+		String color = (String) cmbColorCli.getSelectedItem();
+		return color;
+	}
+	public String getTransmisionFiltro() {
+		String transmision = "";
+		if(rdbtnTodosCli.isSelected()) {
+			transmision = "TODAS";
+		} 
+		if(rdbtnAutomaticoCli.isSelected()) {
+			transmision = "AUTOMATICO";
+		} 
+		if(rdbtnManualCli.isSelected()) {
+			transmision = "MANUAL";
+		}
+		return transmision;
+	}
+	public String getCombustibleFiltro() {
+		String combustible = (String) cmbCombustibleCli.getSelectedItem();
+		return combustible;
+	}
+	public int getPrecioFiltro() {
+		int precio = (int) spnPrecioHastaCli.getValue();
+		return precio;
 	}
 }

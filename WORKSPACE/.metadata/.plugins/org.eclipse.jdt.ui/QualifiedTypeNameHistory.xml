@@ -12,8 +12,16 @@
     <fullyQualifiedTypeName name="java.util.Properties"/>
     <fullyQualifiedTypeName name="com.sun.org.apache.bcel.internal.generic.ARRAYLENGTH"/>
     <fullyQualifiedTypeName name="javax.swing.table.DefaultTableModel"/>
-    <fullyQualifiedTypeName name="java.util.ArrayList"/>
-    <fullyQualifiedTypeName name="dam.pic.model.Coche"/>
     <fullyQualifiedTypeName name="javax.swing.ComboBoxModel"/>
     <fullyQualifiedTypeName name="javax.swing.DefaultComboBoxModel"/>
+    <fullyQualifiedTypeName name="dam.login.view.PLogin"/>
+    <fullyQualifiedTypeName name="dam.pic.model.Cliente"/>
+    <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
+    <fullyQualifiedTypeName name="javax.swing.JPanel"/>
+    <fullyQualifiedTypeName name="dam.login.view.VEmpleado"/>
+    <fullyQualifiedTypeName name="javax.swing.JFrame"/>
+    <fullyQualifiedTypeName name="dam.login.view.PAddVehiculo"/>
+    <fullyQualifiedTypeName name="dam.login.view.PListaVehiculosCli"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="dam.pic.model.Coche"/>
 </qualifiedTypeNameHistroy>

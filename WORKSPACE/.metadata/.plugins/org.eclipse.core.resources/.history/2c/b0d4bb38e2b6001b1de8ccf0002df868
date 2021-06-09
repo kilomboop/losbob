@@ -1,0 +1,77 @@
+package dam.login.view;
+
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+import java.awt.Font;
+import javax.swing.JTextField;
+
+import dam.login.control.LoginListener;
+
+import javax.swing.AbstractButton;
+import javax.swing.JButton;
+import javax.swing.JPasswordField;
+import javax.swing.JScrollPane;
+
+public class PLogin extends JPanel {
+	
+	public static final String BTN_CLIENTE = "Acceder como cliente";
+	public static final String BTN_EMPLEADO = "Acceder como empleado";
+	public static final String BTN_LOGIN = "Log In";
+	
+	private JTextField txtUsuario;
+	private JPasswordField pswdContrasenia;
+	private JButton btnAccesoCliente;
+	public PLogin() {
+		initComponents();
+	}
+
+	private void initComponents() {
+		setLayout(null);
+		
+		setSize(VLoginPrimcipal.ANCHO,VLoginPrimcipal.ALTO);
+		
+		btnAccesoCliente = new JButton("Acceder Como Cliente");
+		btnAccesoCliente.setBounds(36, 71, 163, 50);
+		add(btnAccesoCliente);
+		
+		txtUsuario = new JTextField();
+		txtUsuario.setBounds(371, 98, 144, 23);
+		add(txtUsuario);
+		txtUsuario.setColumns(10);
+		
+		pswdContrasenia = new JPasswordField();
+		pswdContrasenia.setBounds(371, 164, 144, 23);
+		add(pswdContrasenia);
+		
+		JButton btnLogin = new JButton("Log In");
+		btnLogin.setBounds(394, 198, 94, 30);
+		add(btnLogin);
+		
+		JButton btnAccesoEmple = new JButton("Acceder Como Empleado");
+		btnAccesoEmple.setBounds(36, 164, 163, 50);
+		add(btnAccesoEmple);
+		
+	}
+	
+	public void setListener(LoginListener listener) {
+		btnLogIn.addActionListener(listener);
+	}
+	
+	public void mostrarMsjError(String msj) {
+		JOptionPane.showMessageDialog(this,msj,"Error de Datos",JOptionPane.ERROR_MESSAGE);
+	}
+
+	public void mostrarMsjInfo(String msj) {
+		JOptionPane.showMessageDialog(this,msj,"Información de Aplicación",JOptionPane.INFORMATION_MESSAGE);
+		
+	}
+
+	public JTextField getTxtUsuario() {
+		return txtUsuario;
+	}
+	public JTextField getPswdContrasenia() {
+		return pswdContrasenia;
+	}
+}

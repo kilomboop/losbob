@@ -8,12 +8,14 @@ import java.util.ArrayList;
 
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import dam.login.control.PIListener;
 import dam.pic.model.Coche;
 
 import javax.swing.JButton;
@@ -28,10 +30,10 @@ public class VEmpleado extends JFrame {
 	private static final String CLM_PRECIO = "PRECIO";
 	private static final String CLM_TRANSMISION = "TRANSMISION";
 	private static final String CLM_EXTRAS = "EXTRAS";
-	private static final String MNTM_CORESERVA = "Consulta de Reservas";
-	private static final String MNTM_MODVEHICULOS = "Modificación de Vehículos";
-	private static final String BTN_ANIADIR = "Añadir Nuevo Vehículo";
-	private static final String BTN_ELIMINAR = "Eliminar Vehículo";
+	public static final String MNTM_CORESERVA = "Consulta de Reservas";
+	public static final String MNTM_MODVEHICULOS = "Modificación de Vehículos";
+	public static final String BTN_ADD = "Añadir Nuevo Vehiculo";
+	public static final String BTN_ELIMINAR = "Eliminar Vehículo";
 	
 	
 	private DefaultTableModel tblModel;
@@ -85,7 +87,7 @@ public class VEmpleado extends JFrame {
 		btnEliminarVehiculo.setBounds(403, 287, 173, 39);
 		getContentPane().add(btnEliminarVehiculo);
 		
-		btnAddVehiculo = new JButton(BTN_ANIADIR);
+		btnAddVehiculo = new JButton(BTN_ADD);
 		btnAddVehiculo.setBounds(158, 287, 173, 39);
 		getContentPane().add(btnAddVehiculo);
 		
@@ -154,5 +156,33 @@ public class VEmpleado extends JFrame {
 	
 	public void hacerVisible() { 
 		setVisible(true);
+	}
+
+	public String getCocheSelect() {
+		String numCoche = "";
+		
+		if(tblVehiculosEmple.getSelectedRow() == -1) { 
+			mostrarMsjError("Debe seleccionar el coche que desea eliminar");
+		}else{ 
+			numCoche = (String) tblModel.getValueAt(tblVehiculosEmple.getSelectedRow(), 1);
+		}
+		return numCoche;
+	}
+
+	public void mostrarMsjError(String msj) {
+		JOptionPane.showMessageDialog(this, msj, "Error", JOptionPane.ERROR_MESSAGE);
+
+		
+	}
+
+	public void mostrarMsjInfo(String msj) {
+		JOptionPane.showMessageDialog(this, msj, "Información de borrado", JOptionPane.INFORMATION_MESSAGE);
+		
+	}
+
+	public void setListener(PIListener listener) {
+		btnAddVehiculo.addActionListener(listener);
+		btnEliminarVehiculo.addActionListener(listener);
+		
 	}
 }
