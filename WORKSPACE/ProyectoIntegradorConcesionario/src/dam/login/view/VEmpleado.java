@@ -19,6 +19,7 @@ import dam.login.control.PIListener;
 import dam.pic.model.Coche;
 
 import javax.swing.JButton;
+import javax.swing.ListSelectionModel;
 
 public class VEmpleado extends JFrame {
 	private static final String CLM_ID = "ID";
@@ -81,6 +82,7 @@ public class VEmpleado extends JFrame {
 		getContentPane().add(scrollPane);
 		
 		tblVehiculosEmple = new JTable();
+		tblVehiculosEmple.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(tblVehiculosEmple);
 		
 		btnEliminarVehiculo = new JButton(BTN_ELIMINAR);
@@ -183,6 +185,8 @@ public class VEmpleado extends JFrame {
 	public void setListener(PIListener listener) {
 		btnAddVehiculo.addActionListener(listener);
 		btnEliminarVehiculo.addActionListener(listener);
+		mntmModVehiculos.addActionListener(listener);
+		mntmCoReservas.addActionListener(listener);
 		
 	}
 }

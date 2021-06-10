@@ -5,16 +5,22 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 import dam.login.db.PIPersistencias;
 import dam.login.view.PAddVehiculo;
 import dam.login.view.PListaVehiculosCli;
 import dam.login.view.PLogin;
+import dam.login.view.VConsultaRes;
 import dam.login.view.VEmpleado;
 import dam.login.view.VInicial;
+import dam.login.view.VModificacion;
+import dam.login.view.VReserva;
+import dam.pic.model.Cliente;
 import dam.pic.model.Coche;
 import dam.pic.model.Empleado;
+import dam.pic.model.Reserva;
 
 public class PIListener implements ActionListener{
 static final int INTENTOS = 3;
@@ -26,13 +32,19 @@ static final int INTENTOS = 3;
 	private PIPersistencias modelo;
 	private VEmpleado empl;
 	private PAddVehiculo pav;
+	private VModificacion vmod;
+	private VReserva vr;
+	private VConsultaRes vcr;
 	
-	public PIListener(VInicial vi,  PLogin pli, VEmpleado empl, PListaVehiculosCli plvc, PAddVehiculo pav) {
+	public PIListener(VInicial vi,  PLogin pli, VEmpleado empl, PListaVehiculosCli plvc, PAddVehiculo pav, VModificacion vmod , VReserva vr, VConsultaRes vcr) {
 		this.vi = vi;
 		this.pli = pli;
 		this.empl = empl;
 		this.plvc = plvc;
 		this.pav = pav;
+		this.vmod = vmod;
+		this.vr = vr;
+		this.vcr = vcr;
 		
 		modelo = new PIPersistencias();
 	}
@@ -94,10 +106,16 @@ static final int INTENTOS = 3;
 						ArrayList<Coche> listaCoches = modelo.selectCoches();
 						empl.cargarTabla(listaCoches);
 					 }else { 
-						empl.mostrarMsjError("No se podido eliminar el restaurante");
+						empl.mostrarMsjError("No se podido eliminar el coche");
 					 }
 				 } 
 			}
+		}
+		else if(ev.getActionCommand().equals(PListaVehiculosCli.BTN_RESERVA)) {
+			plvc.dispose();
+			vr.setVisible(true);
+			ArrayList<Coche> listaCoches = modelo.selectCoches();
+			vr.cargarTabla(listaCoches);
 		} else if(ev.getActionCommand().equals(VEmpleado.BTN_ADD)) {
 			empl.dispose();
 			pav.hacerVisible();
@@ -152,9 +170,85 @@ static final int INTENTOS = 3;
 				listaCoches = modelo.selectCoche3(combustibleFiltro, transmisionFiltro, precioFiltro);
 			}
 			plvc.cargarTabla(listaCoches);
+		}else if(ev.getActionCommand().equals(VModificacion.BTN_BUSCAR)) {
+			int id = vmod.getId();
+			Coche coche = modelo.selectCocheId(id);
+			
+			if (coche != null) { 
+				vmod.cargarDatos(coche);
+			}else { 
+				vmod.mostrarMsjInfo("El id '" + id + "' no existe en la base de datos");
+			}
+		}else if(ev.getActionCommand().equals(VModificacion.BTN_GUARDAR)) { 
+			Coche coche = vmod.getDatos();
+			int res = modelo.updateCoche(coche);
+			
+			if (res == -1) {
+				vmod.mostrarMsjError("El id seleccionado corresponde a otro coche");		
+			}else if(res == 1) { 
+				vmod.mostrarMsjInfo("La modificacion del coche se ha realizado con exito");
+				empl.cargarTabla(new ArrayList<Coche>());
+			}else {
+				vmod.mostrarMsjError("No se ha podido realizar la modificacion consulte el problema con la base de datos");
+			}
+			
+		} else if(ev.getActionCommand().equals(VReserva.BTN_HACER_RESERVAN)) {
+			Cliente cliente = vr.getDatos();
+			int res = 0;
+			if(cliente != null) {
+				res = modelo.insertCliente(cliente);
+				if (res == 1) {  
+					String dni = vr.getDni();
+					String modeloCoche = vr.getModelo();
+					String id_coche = modelo.getIdCoche(modeloCoche);
+					int res2 = modelo.insertReserva(id_coche, dni);
+					
+					if (res2 == 1) {  
+						vr.mostrarMsjInfo("Reserva realizada correctamente.");
+					}else { 
+						vr.mostrarMsjError("No se ha podido realizar la reserva.");
+
+					}
+				} else if (res == -1) {
+					vr.mostrarMsjError("No se puede insertar el cliente porque ya existe " 
+							+ "el dni en la base de datos.");
+				}else{ 
+					vr.mostrarMsjError("No se ha podido insertar el cliente.");
+
+				}
+			}
+		} else if(ev.getActionCommand().equals(VReserva.BTN_HACER_RESERVAE)) {
+			String dni = vr.getDni();
+			String modeloCoche = vr.getModelo();
+			String id_coche = modelo.getIdCoche(modeloCoche);
+			int res2 = modelo.insertReserva(id_coche, dni);
+			
+			if (res2 == 1) {  
+				vr.mostrarMsjInfo("Reserva realizada correctamente.");
+			}else { 
+				vr.mostrarMsjError("No se ha podido realizar la reserva.");
+
+			}
+		} else if(ev.getActionCommand().equals(VConsultaRes.BTN_VOLVER)) {
+			vcr.dispose();
+			empl.setVisible(true);
+		} else if(ev.getActionCommand().equals(VModificacion.BTN_LIMPIAR)) {
+			vmod.dispose();
+			empl.setVisible(true);
 		}
-		
+	}else if(ev.getSource() instanceof JMenuItem) {
+		if(ev.getActionCommand().equals(VEmpleado.MNTM_MODVEHICULOS)) { 
+			empl.dispose();
+			vmod.hacerVisible();
+		} else if(ev.getActionCommand().equals(VEmpleado.MNTM_CORESERVA)) {
+			empl.dispose();
+			vcr.setVisible(true);
+			
+			ArrayList<Reserva> listaReservas = modelo.selectReserva();
+			vcr.cargarTabla(listaReservas);
+		}
 	}
+		
 
 }
 }

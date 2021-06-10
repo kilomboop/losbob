@@ -13,6 +13,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
@@ -24,6 +25,8 @@ import dam.login.view.VInicial;
 import dam.pic.model.Coche;
 
 import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 
 public class PListaVehiculosCli extends JFrame {
 	
@@ -73,6 +76,7 @@ public class PListaVehiculosCli extends JFrame {
 		getContentPane().add(scrollPane);
 		
 		tblVehiculoCli = new JTable();
+		tblVehiculoCli.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(tblVehiculoCli);
 		
 		JLabel lblListaVehiculosCli = new JLabel("Lista de Veh\u00EDculos disponibles");
@@ -121,7 +125,7 @@ public class PListaVehiculosCli extends JFrame {
 		getContentPane().add(spnPrecioHastaCli);
 		
 		btnReserva = new JButton(BTN_RESERVA);
-		btnReserva.setBounds(565, 293, 138, 41);
+		btnReserva.setBounds(626, 293, 138, 41);
 		getContentPane().add(btnReserva);
 		
 		rdbtnTodosCli = new JRadioButton("Todas");
@@ -144,6 +148,9 @@ public class PListaVehiculosCli extends JFrame {
 		configurarTabla();
 		
 	}
+	
+	
+
 	private void configurarTabla() {
 		tblModel = new DefaultTableModel() {
 			@Override
@@ -206,6 +213,17 @@ public class PListaVehiculosCli extends JFrame {
 		}
 	}
 	
+	
+	public String getRestSelecc() {
+		String modelo = null;
+		if(tblVehiculoCli.getSelectedRow() == -1) {
+		
+		} else {
+			modelo = (String) tblVehiculoCli.getValueAt(tblVehiculoCli.getSelectedRow(), 1);
+		}
+		return modelo;
+	}
+	
 	public void cargarCmbColores(ArrayList<String> listaColores) {
 		cmbModel.removeAllElements();
 		
@@ -251,4 +269,10 @@ public class PListaVehiculosCli extends JFrame {
 		int precio = (int) spnPrecioHastaCli.getValue();
 		return precio;
 	}
+	
+	public void mostrarMsjError(String msj) {
+		JOptionPane.showMessageDialog(this, msj, "Error de selección", JOptionPane.ERROR_MESSAGE);
+		
+	}
+	
 }

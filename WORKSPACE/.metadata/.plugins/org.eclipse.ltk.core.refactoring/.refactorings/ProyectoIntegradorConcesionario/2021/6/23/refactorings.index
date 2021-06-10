@@ -3,3 +3,7 @@
 1623145976904	Extract method 'initComponents'
 1623229616653	Rename local variable 'listaColores'
 1623230661966	Rename local variable 'listaCombustible'
+1623312745490	Rename local variable 'nomFest'
+1623314674448	Extract method 'initComponents'
+1623320702311	Delete element
+1623320708132	Delete element
