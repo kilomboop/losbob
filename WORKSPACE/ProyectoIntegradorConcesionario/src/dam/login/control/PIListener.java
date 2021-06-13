@@ -187,7 +187,8 @@ static final int INTENTOS = 3;
 				vmod.mostrarMsjError("El id seleccionado corresponde a otro coche");		
 			}else if(res == 1) { 
 				vmod.mostrarMsjInfo("La modificacion del coche se ha realizado con exito");
-				empl.cargarTabla(new ArrayList<Coche>());
+				ArrayList<Coche> listaCoches = modelo.selectCoches();
+				empl.cargarTabla(listaCoches);
 			}else {
 				vmod.mostrarMsjError("No se ha podido realizar la modificacion consulte el problema con la base de datos");
 			}
@@ -195,26 +196,29 @@ static final int INTENTOS = 3;
 		} else if(ev.getActionCommand().equals(VReserva.BTN_HACER_RESERVAN)) {
 			Cliente cliente = vr.getDatos();
 			int res = 0;
-			if(cliente != null) {
-				res = modelo.insertCliente(cliente);
-				if (res == 1) {  
-					String dni = vr.getDni();
-					String modeloCoche = vr.getModelo();
-					String id_coche = modelo.getIdCoche(modeloCoche);
-					int res2 = modelo.insertReserva(id_coche, dni);
-					
-					if (res2 == 1) {  
-						vr.mostrarMsjInfo("Reserva realizada correctamente.");
-					}else { 
-						vr.mostrarMsjError("No se ha podido realizar la reserva.");
+			String numCoche = vr.getCocheSelect();
+			if(!numCoche.equals("")) {
+				if(cliente != null) {
+					res = modelo.insertCliente(cliente);
+					if (res == 1) {  
+						String dni = vr.getDni();
+						String modeloCoche = vr.getModelo();
+						String id_coche = modelo.getIdCoche(modeloCoche);
+						int res2 = modelo.insertReserva(id_coche, dni);
+						
+						if (res2 == 1) {  
+							vr.mostrarMsjInfo("Reserva realizada correctamente.");
+						}else { 
+							vr.mostrarMsjError("No se ha podido realizar la reserva.");
+
+						}
+					} else if (res == -1) {
+						vr.mostrarMsjError("No se puede insertar el cliente porque ya existe " 
+								+ "el dni en la base de datos.");
+					}else{ 
+						vr.mostrarMsjError("No se ha podido insertar el cliente.");
 
 					}
-				} else if (res == -1) {
-					vr.mostrarMsjError("No se puede insertar el cliente porque ya existe " 
-							+ "el dni en la base de datos.");
-				}else{ 
-					vr.mostrarMsjError("No se ha podido insertar el cliente.");
-
 				}
 			}
 		} else if(ev.getActionCommand().equals(VReserva.BTN_HACER_RESERVAE)) {

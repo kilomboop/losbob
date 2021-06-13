@@ -233,4 +233,15 @@ public class VReserva extends JFrame {
 		JOptionPane.showMessageDialog(this, msj, "Información de reserva", JOptionPane.INFORMATION_MESSAGE);
 		
 	}
+
+	public String getCocheSelect() {
+		String numCoche = "";
+		
+		if(tblReserva.getSelectedRow() == -1) { 
+			mostrarMsjError("Debe seleccionar el coche que desea reservar");
+		}else{ 
+			numCoche = (String) tblModel.getValueAt(tblReserva.getSelectedRow(), 1);
+		}
+		return numCoche;
+	}
 }

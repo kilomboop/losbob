@@ -1,7 +1,0 @@
-package dam.login.view;
-
-import javax.swing.JPanel;
-
-public class PAddVehiculo extends JPanel{
-
-}
